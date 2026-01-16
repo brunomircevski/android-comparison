@@ -1,0 +1,38 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Network-Level Insights into Google-Free Android Operating Systems}
+
+\author{Bruno Mirčevski\inst{1}\orcidID{0009-0007-1008-6708} \and
+Second Author\inst{1}\orcidID{1111-2222-3333-4444}}
+
+\authorrunning{B. Mirčevski et al.}
+
+\institute{Faculty of Computer Science, Bialystok University of Technology, Wiejska 45a, 15-351, Bialystok, Poland}
+
+\maketitle
+
+\begin{abstract}
+This paper presents a comparative analysis of privacy in Android operating systems through network traffic inspection. Using a controlled man-in-the-middle setup and traffic decryption techniques, five Android distributions were evaluated: stock Google Android, GrapheneOS, iodéOS and LineageOS. The study examined outbound connections, transmitted identifiers, and telemetry patterns to assess the impact of integrated Google services on user privacy. Results indicate that stock Android maintains the most background communication with Google servers, transmitting identifiers and metadata even when idle. In contrast, privacy-focused systems minimize unsolicited traffic and offer stronger user control. The findings demonstrate that alternative Android distributions can substantially improve privacy without sacrificing core functionality, highlighting the potential of open-source ecosystems as viable, privacy-respecting alternatives to Google-dependent mobile environments.
+
+\keywords{Android  \and Privacy \and Network traffic.}
+\end{abstract}
+
+% ---- Content ----
+
+\input{chapters/01-introduction.tex}
+\input{chapters/02-related-work.tex}
+\input{chapters/03-alternative-android-os.tex}
+\input{chapters/04-methodology.tex}
+\input{chapters/05-results.tex}
+\input{chapters/06-conclusion.tex}
+
+% ---- Bibliography ----
+\bibliographystyle{splncs04}
+\bibliography{refs}
+
+\end{document}
