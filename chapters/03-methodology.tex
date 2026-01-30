@@ -8,16 +8,16 @@
 \subsection{Measurement Scenarios}
 To enable consistent, comparable measurements across Android distributions, four setup scenarios were defined. Each scenario specifies (i) Google account state, (ii) consent/permission posture, and (iii) what Google components are present. Not all scenarios apply to every operating system due to their characteristics.
 
-\paragraph{Scenario A: Minimal Setup, No Google Account.}
-The device is configured with a maximum privacy in mind, avoiding Google account sign-in. During initial setup, only strictly required prompts are accepted, optional data-sharing is declined.
+\paragraph{Scenario A: Default Setup with Google Account.}
+The device is configured to reflect a typical user path. Google account sign-in is performed during setup (or immediately after) and default recommendations are accepted (including permissions).
 
-\paragraph{Scenario B: Minimal Setup, With Google Account.}
-This scenario mirrors \textit{Scenario A} in all consent and permission choices, but includes login into Google account during initial setup (or immediately after). Google account used in this scenario has settings adjusted toward minimal data collection.
+\paragraph{Scenario A2: Minimal Setup with Google Account.}
+This scenario applies exclusively to the official factory system. It extends \textit{Scenario A} by systematically minimizing privacy exposure while retaining Google account functionality. During and after initial setup, all optional consents and permissions are declined. System and account settings are adjusted to maximize user privacy. This scenario is not applicable to alternative distributions, as these systems are configured for privacy by default and do not implement or prompt users for privacy-threatening features characteristic of the factory system.
 
-\paragraph{Scenario C: Default Setup, With Google Account.}
-The device is configured to reflect a typical user path. Google account sign-in is performed and default recommendations are accepted (including prompted permissions).
+\paragraph{Scenario B: Minimal Setup without Google Account.}
+The device is configured with maximum privacy in mind, avoiding Google account sign-in entirely. During initial setup, only strictly required prompts are accepted and optional data-sharing is declined. System settings are  adjusted to maximize user privacy. Google components or their functional replacements remain present and enabled to preserve baseline device functionality and app compatibility, but operate without account.
 
-\paragraph{Scenario D: Extremely Minimal Setup, No Google Components.}
-This scenario is possible only on systems that do not bundle/enable Google components/replacements by default.
+\paragraph{Scenario C: Extremely Minimal Setup without Google Components.}
+This scenario applies only to distributions that do not bundle or enable Google components by default. The device is configured to operate without any Google Mobile Services, sandboxed Google Play, or microG. On GrapheneOS, this configuration is achieved by declining installation of Google components during initial setup; on LineageOS and iod\'eOS, microG is present but explicitly disabled. This scenario is not applicable to the official factory system, which bundles and enables Google components by default.
 
 [Scenario adaptation to microg/graphene...]
