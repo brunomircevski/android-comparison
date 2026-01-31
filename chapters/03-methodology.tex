@@ -6,18 +6,34 @@
 \end{figure}
 
 \subsection{Measurement Scenarios}
-To enable consistent, comparable measurements across Android distributions, four setup scenarios were defined. Each scenario specifies (i) Google account state, (ii) consent/permission posture, and (iii) what Google components are present. Not all scenarios apply to every operating system due to their characteristics.
+To enable consistent, comparable measurements across Android distributions, four setup scenarios were defined. Each scenario specifies the Google account state, consent and permission posture, and which Google components are present. Not all scenarios apply to every operating system due to their characteristics. Scenarios were adapted to each system's capabilities: on GrapheneOS, sandboxed Google Play Services were installed immediately after setup; on systems with microG, the component was enabled during initial setup when prompted, or activated manually immediately afterward. As a general principle, any required configuration step not available during initial setup was performed as soon as possible thereafter.
 
 \paragraph{Scenario A: Default Setup with Google Account.}
-The device is configured to reflect a typical user path. Google account sign-in is performed during setup (or immediately after) and default recommendations are accepted (including permissions).
+The device is configured to reflect a typical user path. Google account sign-in is performed during setup (or immediately after) and default recommendations are accepted (including prompted permissions).
 
 \paragraph{Scenario A2: Minimal Setup with Google Account.}
-This scenario applies exclusively to the official factory system. It extends \textit{Scenario A} by systematically minimizing privacy exposure while retaining Google account functionality. During and after initial setup, all optional consents and permissions are declined. System and account settings are adjusted to maximize user privacy. This scenario is not applicable to alternative distributions, as these systems are configured for privacy by default and do not implement or prompt users for privacy-threatening features characteristic of the factory system.
+This scenario extends \textit{Scenario A} by adjusting settings towards privacy while retaining Google account functionality. During and after initial setup, all optional consents and permissions are declined. System and account settings are adjusted to maximize user privacy. This scenario is not applicable systems using microG or GrapheneOS, as these distributions are already designed to minimize privacy risks and do not implement or prompt users for privacy-threatening features characteristic of the factory system.
 
 \paragraph{Scenario B: Minimal Setup without Google Account.}
 The device is configured with maximum privacy in mind, avoiding Google account sign-in entirely. During initial setup, only strictly required prompts are accepted and optional data-sharing is declined. System settings are  adjusted to maximize user privacy. Google components or their functional replacements remain present and enabled to preserve baseline device functionality and app compatibility, but operate without account.
 
 \paragraph{Scenario C: Extremely Minimal Setup without Google Components.}
-This scenario applies only to distributions that do not bundle or enable Google components by default. The device is configured to operate without any Google Mobile Services, sandboxed Google Play, or microG. On GrapheneOS, this configuration is achieved by declining installation of Google components during initial setup; on LineageOS and iod\'eOS, microG is present but explicitly disabled. This scenario is not applicable to the official factory system, which bundles and enables Google components by default.
+This scenario applies only to distributions that do not bundle or enable Google services by default. It is not applicable to the official factory system, which enables Google components by default. If microG is preinstalled, it remains disabled.
 
-[Scenario adaptation to microg/graphene...]
+\subsection{Measurement Tasks}
+We performed the following measurement tasks sequentially for each scenario. For each task, we captured network traffic using Wireshark for basic analysis.
+
+\paragraph{Task 0: Initial setup.}
+Configure the device according to the target scenario, connect to Wi-Fi, complete account sign-ins and install components as specified. Network traffic capture begins with the device's first Internet connection and continues until 10 minutes after setup completion.
+
+\paragraph{Task 1: System idle.}
+Ensure the system and apps are up to date and that no update-related background jobs are running. Reboot the device to begin capture, then keep it connected to the monitored network for at least 30 minutes. During this period, unlock the device three times and scroll through the app list. Do not open any apps.
+
+\paragraph{Task 2: Basic apps interactions.}
+Open preinstalled apps to perform simple actions, which should not require Internet connection:
+\begin{itemize}
+	\item \textbf{Settings:} disable haptic feedback; toggle dark mode; check per-app battery usage
+	\item \textbf{Clock:} set an alarm
+	\item \textbf{Files:} create a folder
+	\item \textbf{Contacts:} create a local (on-device) contact
+\end{itemize}
