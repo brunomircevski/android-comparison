@@ -1,6 +1,7 @@
 \section{Experiment design}
 
 \subsection{Hardware and software}
+
 We used a single Google Pixel 6a (codename \textit{bluejay}) to install and evaluate studied Android distributions. This model was chosen due to its broad compatibility with alternative operating systems. The full measurement setup is shown in Fig.~\ref{fig-devices}.  All tested builds base on Android 16 and were obtained in December 2025:
 \begin{itemize}
 	\item Stock Android: \texttt{BP4A.251205.006}
@@ -16,7 +17,7 @@ We used a single Google Pixel 6a (codename \textit{bluejay}) to install and eval
 	\caption{Measurement setup. Android device running studied operating systems is configured to access Internet using Wi-Fi. Access point is hosted on a Linux computer, running traffic interception and capturing software. Custom system certificate is installed on the phone using root access. USB connection is used for ADB/Frida communication.} \label{fig-devices}
 \end{figure}
 
-\subsection{Measurement Scenarios}
+\subsection{Measurement scenarios}
 To enable consistent, comparable measurements across Android distributions, four setup scenarios were defined. Each scenario specifies the Google account state, consent and permission posture, and which Google components are present. Not all scenarios apply to every operating system due to their characteristics. Scenarios were adapted to each system's capabilities: on GrapheneOS, sandboxed Google Play Services were installed immediately after setup; on systems with microG, the component was enabled during initial setup when prompted, or activated manually immediately afterward. As a general principle, any required configuration step not available during initial setup was performed as soon as possible thereafter.
 
 \paragraph{Scenario A: Default Setup with Google Account.}
@@ -31,7 +32,7 @@ The device is configured with maximum privacy in mind, avoiding Google account s
 \paragraph{Scenario C: Extremely Minimal Setup without Google Components.}
 This scenario applies only to distributions that do not bundle or enable Google services by default. It is not applicable to the official factory system, which enables Google components by default. If microG is preinstalled, it remains disabled.
 
-\subsection{Measurement Tasks}
+\subsection{Measurement tasks}
 We performed the following measurement tasks sequentially for each scenario. Network traffic was captured using Wireshark for basic analysis.
 
 \paragraph{Task 0: Initial setup.}
