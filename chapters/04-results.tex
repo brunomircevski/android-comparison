@@ -34,29 +34,26 @@ Figure~\ref{fig-apps-chart} shows network activity during basic app interactions
 	\caption{Domain-level distribution of network packets for scenarios A (with Google account) and B (without Google account, but Google Services present), aggregated over all tasks. Each pie shows the top domains by packet count for a given operating system and scenario.} \label{fig-domains-chart}
 \end{figure}
 
-Figure \ref{fig-domains-chart} presents the domain-level distribution of network traffic for Scenarios A and B, selected as the most realistic configurations incorporating essential Google functionality while differing in account linkage and privacy-related settings.
+Figure \ref{fig-domains-chart} presents the domain-level distribution of network traffic for Scenarios A and B. They where selected as the most realistic configurations incorporating essential Google functionality while differing in account linkage and privacy-related settings. Stock Android contacts the widest range of Google domains, spreading traffic across many different endpoints. Alternative systems show less Google communication, though patterns vary by design. GrapheneOS makes more requests than microG-based systems because it downloads Google services on demand from its own app store rather than having them preinstalled. IodéOS and LineageOS with microG reach fewer Google servers overall, as microG replaces some Google functions with its own infrastructure.
 
-Stock Android contacts the widest range of Google domains, spreading traffic across many different endpoints. Alternative systems show less Google communication, though patterns vary by design. GrapheneOS makes more requests than microG-based systems because it downloads Google services on demand from its own app store rather than having them preinstalled. IodéOS and LineageOS with microG reach fewer Google servers overall, as microG replaces some Google functions with its own infrastructure.
-
-Table \ref{tab:domains-mechanisms} shows a gradient in how much each system relies on Google-operated endpoints. LineageOS (all variants) stays closest to stock Android, using google servers for these basic features. IodéOS sits in the middle, while GrapheneOS pushes furthest away from Google services. Both iodéOS and GrapheneOS also surface relevant toggles in their system settings, letting users decide for themselves whether to enable or disable these connectivity features.
-
-[EXPLAIN TABLE]
+Table~\ref{tab:domains-mechanisms} shows the infrastructure dependencies for three essential system functions. LineageOS variants remain closest to stock Android, relying entirsely on Google servers for connectivity checks, remote provisioning, and location assistance. IodéOS adopts an intermediate position, using independent infrastructure for connectivity checks while still depending on Google for remote provisioning and location services. GrapheneOS demonstrates the strongest de-Googling, substituting all three functions with its own or independently operated infrastructure. Both iodéOS and GrapheneOS expose these mechanisms through explicit system settings toggles, though GrapheneOS offers more granular control: users may choose between its independent infrastructure and official Google servers for each function, with defaults configured to avoid Google connections entirely.
 
 \begin{table}
-	\caption{[TABLE NEEDS RETESTING, MISSING DATA] Domains observed for connectivity check, remote provisioning, and location assistance.}\label{tab:domains-mechanisms}
+	\caption{Domains observed for connectivity check, remote provisioning, and location assistance.}\label{tab:domains-mechanisms}
 	\centering
 	\resizebox{\linewidth}{!}{%
 		\begin{tabular}{|l|l|l|l|}
 			\hline
 			System & Connectivity check & Remote provisioning & Location assistance\\
 			\hline
-			Stock Android & connectivitycheck.gstatic.com & -- & agnss.goog\\
-			LineageOS & connectivitycheck.gstatic.com & remoteprovisioning.googleapis.com & agnss.goog\\
-			iodeOS & captiveportal.kuketz.de & remoteprovisioning.googleapis.com & --\\
-			GrapheneOS & connectivitycheck.gstatic.com & remoteprovisioning.grapheneos.org & --\\
+			Stock Android & connectivitycheck.gstatic.com & -- & agnss.goog supl.google.com\\
+			LineageOS & connectivitycheck.gstatic.com & remoteprovisioning.googleapis.com & agnss.goog supl.google.com\\
+			iodeOS & captiveportal.kuketz.de & remoteprovisioning.googleapis.com & supl.google.com\\
+			GrapheneOS & connectivitycheck.grapheneos.network & remoteprovisioning.grapheneos.org & gs-loc.apple.grapheneos.org\\
 			\hline
 		\end{tabular}%
 	}
 \end{table}
+
 
 \subsection{Additional findings}
