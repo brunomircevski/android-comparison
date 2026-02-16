@@ -55,49 +55,29 @@ Table~\ref{tab:domains-mechanisms} shows the infrastructure dependencies for bas
 	}
 \end{table}
 
-
 \subsection{Additional findings}
 
-[Mention that some of these results where gathered earlier on android 14, we where not able to confirm them later in android 16 due to frida method not working anymore, but we expect general trend to remain similar]
+Beyond aggregate traffic measurements, we examined specific data transmissions revealed through TLS interception and payload analysis. Some observations were gathered earlier on Android 14 and could not be reconfirmed on Android 16, as the Frida-based method we employed became unsuccessful, though we expect the general patterns to persist. GrapheneOS blocked all our instrumentation attempts, so we cannot verify what data these requests contained. However, the substantially lower request volume suggests sandboxed Google Play Services likely transmit less complete or authentic information.
 
-NOTES FOR: Android “checkin” request:
-in stock os sends real imei and serial number.
-in microg fake and randomly changing imei and mac adress is used.
-mac addresses start with "b4:07:f9" but last part varies, all imei starts with 35503104...
-android id in microg requests is often empty, zero.
-microg sends real device information like device model, os version, timezone.
-microg sends serial key like 008741D1E2C1C2C7, which is also displayed in microg settings, it acts as a unique generated identifier to hide real device identifiers.
+\paragraph{Device identifiers.}
+Android's checkin mechanism transmits device identifiers to Google infrastructure. On stock systems, this includes the real IMEI and hardware serial number. In contrast, microG employs a privacy-preserving approach by generating randomized, rotating identifiers including fake IMEIs (consistently prefixed with \texttt{35503104}), MAC addresses (with OUI \texttt{b4:07:f9}), and a synthetic serial key displayed in microG settings. The Android ID field in microG requests is frequently empty or zeroed. However, microG still transmits authentic device characteristics including model, Android version, and timezone, enabling functional compatibility while obscuring persistent hardware identifiers.
 
-NOTES FOR: app-measurment.com/region1.app-measurement.com
-on os with google services we noticed requests to these domains. on lineage stock and graphene. these requests contain app name, source of installation (google play/aurora/manual), system theme (dark/light), app version, android id. Info about installed and not open apps where send too. We where not able to verify what region1.app-measurement.com on graphene os contained because grapheneos blocked frida attempts.
+\paragraph{Application telemetry.}
+We observed requests to \texttt{app-measurement.com} on systems with Google services present, most on stock Android. These transmissions contained application package names, installation sources (Google Play, Aurora Store, manual), app versions and system theme preference. Information about installed applications was transmitted even for apps that were never launched.
 
-NOTES FOR: ADID
-In few requests in stock we noticed ADID (format: d72ed0d9-c534-4c76-bf42-5185a6e7850d). It was present in some google requests to different domains. value was constant across requests. It is resettable in settings, after removing it in settings we noticed it being changed into zeros.
+\paragraph{Advertising ID.}
+The Google Advertising ID (ADID) was observed in multiple requests on stock Android, formatted as a UUID. This value remained constant across different requests, confirming its persistence as a cross-app tracking mechanism. After manual reset in system settings, the ADID was transmitted as zeros, indicating the identifier was actually cleared rather than regenerated immediately.
 
-NOTES FOR: Microg location
-microG is sending nearby cell-tower and Wi‑Fi scan data to api.positon.xyz to estimate the phone’s location (network-based geolocation). The cell-tower request succeeds and returns an approximate lat/lng with accuracy, while the Wi‑Fi-based lookups return “404 Not found,” meaning that service/key doesn’t have matching Wi‑Fi AP location data available.
-It happens only after users enables it and chooses location provider. No google.
-<request base64="false"><![CDATA[POST /v1/geolocate?key=627db168-2a5e-11ef-afbd-a75f87425aa4 HTTP/1.1
-User-Agent: microG/0.3.10.250932 (Linux; Android 16; com.google.android.gms)
-Content-Type: application/json; charset=utf-8
-Host: api.positon.xyz
-Connection: keep-alive
-Accept-Encoding: gzip, deflate, br
-Content-Length: 298
+\paragraph{Network-based geolocation in microG.}
+When enabled by the user, microG performs network geolocation without Google infrastructure by querying a selected provider, in our case \texttt{api.positon.xyz}. The request transmits nearby cell tower data and returns approximate coordinates. Location fixes were obtained almost immediately after enabling this feature, compared to substantially slower determination prior to activation.
 
-{"considerIp":false,"homeMobileCountryCode":260,"homeMobileNetworkCode":1,"radioType":"wcdma","cellTowers":[{"radioType":"wcdma","mobileCountryCode":260,"mobileNetworkCode":1,"locationAreaCode":11018,"cellId":75678399,"age":16,"psc":355,"signalStrength":-94}],"fallbacks":{"lacf":true,"ipf":false}}]]></request>
-<status>200</status>
-<responselength>532</responselength>
-<mimetype>JSON</mimetype>
-<response base64="false"><![CDATA[HTTP/2 200 OK
-Server: nginx/1.22.1
-Date: Thu, 11 Dec 2025 10:49:24 GMT
-Content-Type: application/json; charset=utf-8
-Content-Length: 322
-X-Powered-By: Express
-Etag: W/"142-LUquWahK9inoXp0ExE4zfupVysQ"
-
-{"raw":[{"timestamp":1772928000000,"location":{"lat":53.044937,"lng":21.585724},"accuracy":3294,"cellTower":{"radioType":"wcdma","mobileCountryCode":260,"mobileNetworkCode":1,"locationAreaCode":11018,"cellId":75678399,"age":16,"psc":355,"signalStrength":-94}}],"location":{"lat":53.044937,"lng":21.585724},"accuracy":3294}]]></response>
-
+\paragraph{App store comparison.}
+We compared Google Play Store with Aurora Store, a popular application source in alternative Android distributions, by downloading the same application from both stores. Both retrieved identical packages from the same Google CDN infrastructure. However, the Play Store generated 106 requests while Aurora Store produced 93 requests, omitting Google telemetry connections, but adding lookups to Exodus Privacy and Plexus databases for tracker analysis and compatibility ratings. Aurora achieves functional equivalence by mimicking Play Store user agents and headers, though with shared anonymous credentials rather than personal account.
 
 \subsection{Google Takeout}
+
+Following testing scenarios where we logged into a Google account, we submitted Google Takeout requests and analyzed the Android device data. Our selection covered three distinct Google service configurations: Stock Android and LineageOS with GMS as systems incorporating official Google services, LineageOS with microG as an open source reimplementation (IodéOS includes an identical microG version), and GrapheneOS as a representative of sandboxed Google Play. For every logged in system, an entry appeared in \texttt{devices.json} containing device model, OS version, country, language, registration timestamp, and last activity time. However, the depth of telemetry varied considerably across configurations.
+
+Both systems using official Google services reported a large list of installed apps. GrapheneOS reported only four preinstalled applications, two of which were GrapheneOS specific. In contrast, microG did not create any app-related entry in Takeout. Additionally, Stock Android and LineageOS with GMS both transmitted authentic hardware identifiers including IMEI and serial number. GrapheneOS submitted a falsified serial number and omitted IMEI entirely. Again, microG did not create additional device-related entry, so these identifiers were not present.
+
+A Pixel specific telemetry directory, present only for Stock Android and LineageOS with GApps, contained extensive hardware monitoring data including power measurements, Wi-Fi signal logs, battery capacity readings, thermal samples, and battery cycle entries. LineageOS reported less granular telemetry than Stock Android, indicating that while basic Pixel telemetry infrastructure remains functional, the depth of hardware monitoring is reduced compared to the proprietary stock implementation.
