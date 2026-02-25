@@ -8,4 +8,10 @@ Alternative distributions also improve user control through minimal base systems
 
 Several limitations qualify these findings. Our measurements capture specific time-bounded scenarios rather than universal behavior. Traffic patterns likely vary with extended use and evolving service configurations. The TLS interception approach, while revealing substantial information, remains incomplete due to certificate pinning, anti-tamper mechanisms, and protocol evolution. GrapheneOS's resistance to our instrumentation, while security-advantageous, means we cannot closely verify what data sandboxed services transmit. These constraints mean our findings indicate general trends and architectural differences rather than definitive absolute measurements.
 
-In summary, privacy-focused Android distributions deliver measurable, substantial improvements in user control and data exposure reduction. By separating essential functionality from integrated proprietary services, these systems transform Google communication from ambient background activity into user-initiated interactions The choice between approaches (microG or GrapheneOS sandbox) depends on individual threat models and functional requirements, but all represent meaningful advances in user control and privacy over stock Android.
+\section{Conclusion}
+
+[What was done]
+
+Privacy-focused Android distributions deliver measurable, substantial improvements in user control and data exposure reduction. By separating essential functionality from integrated proprietary services, these systems transform Google communication from ambient background activity into user-initiated interactions. Alternative distributions minimize data transmission to Google, conceal identifiable device information through identifier randomization, and replace proprietary infrastructure with privacy-focused alternatives where possible. The choice between approaches (microG or GrapheneOS sandbox) depends on individual threat models and functional requirements, but all represent meaningful advances in user control and privacy over stock Android.
+
+[Future work]
