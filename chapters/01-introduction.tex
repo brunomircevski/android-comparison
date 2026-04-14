@@ -16,5 +16,14 @@ In this work we focus on three representative approaches: GrapheneOS, iodéOS an
 LineageOS\footnote{\url{https://lineageos.org/}} provides a lightweight, broadly supported AOSP-based system with minimal preinstalled software and extensive device compatibility. It can be deployed in multiple configurations: without Google services, with proprietary Google Play Services and Play Store (Gapps\footnote{\url{https://mindthegapps.com/}}), or with microG\footnote{\url{https://lineage.microg.org/}} as an open-source reimplementation of key Google components. These configurations represent different trade-offs between privacy, compatibility, and reliance on proprietary services.
 
 Finally, iod\'eOS\footnote{\url{https://iode.tech/iodeos/}} is a privacy-oriented distribution based on LineageOS that combines a de-Googled baseline with additional privacy features and preconfigured app ecosystem choices, shipping with microG. For completeness, CalyxOS\footnote{\url{https://calyxos.org/}} and /e/OS\footnote{\url{https://e.foundation/e-os/}} follow a similar privacy-oriented direction (AOSP-based, microG-enabled, and designed for practical daily use). They were considered for the study, but were excluded because they did not receive updates to the current Android version during the measurement period.
+\\
+\\
+\noindent Our main contributions are as follows: 
+\begin{itemize}
+	\item We present a comparative network-level privacy analysis of six Android system configurations, including stock Android, GrapheneOS, iodéOS, and multiple LineageOS variants, covering a broad spectrum of Google service integration models.
+	\item We provide, to the best of our knowledge, the first systematic empirical comparison between privileged Google Mobile Services (GMS), sandboxed Google Play Services in GrapheneOS, and open-source replacements such as microG under comparable conditions.
+	\item We design a controlled real-device measurement methodology for modern Android systems (Android 16), combining traffic interception, TLS decryption where possible, and realistic user scenarios including setup, idle operation, and basic tasks.
+	\item We quantify how alternative Android distributions reduce unsolicited background communication, limit identifier exposure, and improve user control compared to stock Android, while preserving core functionality.
+\end{itemize}
 
 The rest of the paper is structured as follows. Section 2 reviews related work concerning network traffic analysis and Android privacy. Section 3 details the experiment design, including the hardware, software, and specific measurement scenarios utilized in our study. Section 4 presents the evaluation results, highlighting data usage across configurations and specific packets analysis. Section 5 discusses the broader implications of these findings, along with study limitations. Finally, Section 6 concludes the paper and outlines potential directions for future research.
