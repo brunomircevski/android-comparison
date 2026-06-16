@@ -18,6 +18,14 @@ We used a single Google Pixel 6a device (codename \textit{bluejay}) to install a
 
 Network traffic analysis on Android is challenging due to enforced encryption, certificate pinning, and anti-tamper mechanisms. Traffic was captured using a controlled man-in-the-middle (MITM) gateway with a Linux host acting as a Wi-Fi router, redirecting HTTP(S) traffic through an intercepting proxy. QUIC over UDP/443 was blocked to force TCP-based TLS. The proxy CA was installed as a system-trusted certificate (requiring root). Runtime unpinning via dynamic instrumentation was attempted where certificate pinning blocked interception. Full packet captures were recorded and compared across distributions. We acknowledge that we were not able to capture and analyze all traffic. Instead, we focus on identifying systematic differences between Android distributions and general behavioral patterns. A preview of the measurement setup is shown in Fig.~\ref{fig-devices}.
 
+\subsection{Threat model}
+
+This study evaluates privacy at the operating-system layer, focusing on data transmitted by privileged system components and integrated Google services. We assume a privacy-conscious user who wants to use a smartphone for everyday tasks while limiting the exposure of personal data, persistent identifiers, and behavioral metadata to remote service providers.
+
+We define the primary adversary as Google due to its preinstalled, privileged system components and its data-driven advertising business model, which relies on extensive data collection. Google can receive traffic initiated by the OS, retain server-side records linked to a Google account, and build long-term profiles from persistent identifiers and recurring background activity.
+
+We do not model active on-device attackers, physical device compromise, baseband-level attacks, or the exploitation of OS vulnerabilities. Therefore, this evaluation focuses on privacy leaks from standard, intended service integrations rather than device security.
+
 \subsection{Measurement scenarios}
 To enable consistent and comparable measurements across Android distributions, four scenarios were defined. Each scenario specifies the Google account state, consent and permission posture, and which Google components are present. Not all scenarios apply to every operating system due to their characteristics. Scenarios were adapted to each system's capabilities: on GrapheneOS, sandboxed Google Play Services were installed immediately after setup; on systems with microG, the component was enabled during initial setup when prompted, or activated manually immediately afterward. As a general principle, any required configuration step not available during initial setup was performed as soon as possible thereafter.
 
