@@ -1,0 +1,44 @@
+\documentclass[sigconf,nonacm]{acmart}
+
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{url}
+
+\title{What Google Knows: Measuring Telemetry and Identifier Exposure Across Privacy-Focused Android Operating Systems}
+
+\author{Bruno Mirčevski}
+\orcid{0009-0007-1008-6708}
+\affiliation{%
+  \institution{Faculty of Computer Science, Bialystok University of Technology}
+  \city{Bialystok}
+  \country{Poland}
+}
+
+\author{Krzysztof Jurczuk}
+\orcid{0000-0001-6469-1769}
+\affiliation{%
+  \institution{Faculty of Computer Science, Bialystok University of Technology}
+  \city{Bialystok}
+  \country{Poland}
+}
+
+\begin{document}
+
+\begin{abstract}
+This paper presents a comparative analysis of user privacy in Android operating systems through network traffic inspection. Using a controlled man-in-the-middle setup and traffic decryption techniques, six Android systems were evaluated: stock Android (GMS), GrapheneOS, iod\'eOS, and three variants of LineageOS (stock, Gapps, microG). While prior work focuses on applications or stock Android across device manufacturers, this study investigates alternative Android distributions designed with privacy as a primary objective. We examined outbound connections, transmitted identifiers, and network traffic patterns to assess the impact of integrated Google services on user privacy. Our findings demonstrate that stock Android maintains the most communication with Google servers, transmitting identifiers and metadata even when the device is not actively in use. In contrast, all privacy-focused systems minimize unsolicited traffic and offer stronger user control. These results provide practical insights into how alternative Android distributions can improve user privacy without sacrificing core functionality, highlighting the potential of open-source ecosystems as viable, privacy-respecting alternatives to Google-dependent mobile environments.
+\end{abstract}
+
+\keywords{Android, Privacy, Network traffic}
+
+\maketitle
+
+\input{chapters/01-introduction.tex}
+\input{chapters/02-related-work.tex}
+\input{chapters/03-methodology.tex}
+\input{chapters/04-results.tex}
+\input{chapters/05-conclusion.tex}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

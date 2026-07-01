@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="3.33in" height="2.48in" viewBox="0 0 320 238">
+<rect width="100%" height="100%" fill="white"/>
+<text x="8.0" y="15.0" font-size="7.8" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#555555">Bubble size shows packets count</text>
+<rect x="172.0" y="8.0" width="8.0" height="8.0" fill="#0072B2"/>
+<text x="183.0" y="15.0" font-size="8.5" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#222222">Google</text>
+<rect x="237.0" y="8.0" width="8.0" height="8.0" fill="#E69F00"/>
+<text x="248.0" y="15.0" font-size="8.5" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#222222">Other</text>
+<line x1="107.0" y1="26.0" x2="107.0" y2="200.0" stroke="#d8d8d8" stroke-width="0.6"/>
+<text x="107.0" y="212.0" font-size="8" font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="normal" fill="#555555">0</text>
+<line x1="151.2" y1="26.0" x2="151.2" y2="200.0" stroke="#d8d8d8" stroke-width="0.6"/>
+<text x="151.2" y="212.0" font-size="8" font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="normal" fill="#555555">10</text>
+<line x1="195.5" y1="26.0" x2="195.5" y2="200.0" stroke="#d8d8d8" stroke-width="0.6"/>
+<text x="195.5" y="212.0" font-size="8" font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="normal" fill="#555555">20</text>
+<line x1="239.8" y1="26.0" x2="239.8" y2="200.0" stroke="#d8d8d8" stroke-width="0.6"/>
+<text x="239.8" y="212.0" font-size="8" font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="normal" fill="#555555">30</text>
+<line x1="284.0" y1="26.0" x2="284.0" y2="200.0" stroke="#d8d8d8" stroke-width="0.6"/>
+<text x="284.0" y="212.0" font-size="8" font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="normal" fill="#555555">40</text>
+<line x1="107.0" y1="200.0" x2="284.0" y2="200.0" stroke="#555555" stroke-width="0.6"/>
+<text x="195.5" y="229.0" font-size="9" font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="normal" fill="#222222">Unique domains contacted</text>
+<text x="100.0" y="46.4" font-size="8.6" font-family="Arial, Helvetica, sans-serif" text-anchor="end" font-weight="normal" fill="#222222">Stock Android</text>
+<circle cx="270.7" cy="38.7" r="10.0" fill="#0072B2" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="283.2" y="41.1" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">1.2M</text>
+<circle cx="124.7" cy="48.1" r="4.9" fill="#E69F00" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="132.1" y="50.5" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">396</text>
+<line x1="103.0" y1="60.8" x2="284.0" y2="60.8" stroke="#eeeeee" stroke-width="0.6"/>
+<text x="100.0" y="81.2" font-size="8.6" font-family="Arial, Helvetica, sans-serif" text-anchor="end" font-weight="normal" fill="#222222">GrapheneOS</text>
+<circle cx="253.0" cy="73.5" r="9.0" fill="#0072B2" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="264.5" y="75.9" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">262k</text>
+<circle cx="146.8" cy="82.9" r="8.6" fill="#E69F00" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="157.9" y="85.3" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">139k</text>
+<line x1="103.0" y1="95.6" x2="284.0" y2="95.6" stroke="#eeeeee" stroke-width="0.6"/>
+<text x="100.0" y="116.0" font-size="8.6" font-family="Arial, Helvetica, sans-serif" text-anchor="end" font-weight="normal" fill="#222222">iodéOS</text>
+<circle cx="155.7" cy="108.3" r="6.2" fill="#0072B2" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="164.3" y="110.7" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">2.8k</text>
+<circle cx="138.0" cy="117.7" r="5.6" fill="#E69F00" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="146.1" y="120.1" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">1.1k</text>
+<line x1="103.0" y1="130.4" x2="284.0" y2="130.4" stroke="#eeeeee" stroke-width="0.6"/>
+<text x="100.0" y="150.8" font-size="8.6" font-family="Arial, Helvetica, sans-serif" text-anchor="end" font-weight="normal" fill="#222222">LineageOS (Gapps)</text>
+<circle cx="244.2" cy="143.1" r="9.3" fill="#0072B2" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="255.9" y="145.5" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">388k</text>
+<circle cx="133.6" cy="152.5" r="4.9" fill="#E69F00" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="140.9" y="154.9" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">343</text>
+<line x1="103.0" y1="165.2" x2="284.0" y2="165.2" stroke="#eeeeee" stroke-width="0.6"/>
+<text x="100.0" y="185.6" font-size="8.6" font-family="Arial, Helvetica, sans-serif" text-anchor="end" font-weight="normal" fill="#222222">LineageOS (microG)</text>
+<circle cx="177.8" cy="177.9" r="6.3" fill="#0072B2" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="186.6" y="180.3" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">3.3k</text>
+<circle cx="111.4" cy="187.3" r="3.0" fill="#E69F00" fill-opacity="0.82" stroke="#333333" stroke-width="0.5"/>
+<text x="116.9" y="189.7" font-size="7.3" font-family="Arial, Helvetica, sans-serif" text-anchor="start" font-weight="normal" fill="#333333">18</text>
+</svg>
