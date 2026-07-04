@@ -136,7 +136,6 @@ def build_svg() -> str:
             f'viewBox="0 0 {WIDTH} {HEIGHT}">'
         ),
         '<rect width="100%" height="100%" fill="white"/>',
-        text(8, 15, "Bubble size shows packets count", size=7.8, fill="#555555"),
     ]
 
     legend_x = 172
