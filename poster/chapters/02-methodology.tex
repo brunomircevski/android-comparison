@@ -1,0 +1,44 @@
+\section{Experiment design}
+
+\subsection{Hardware and software}
+
+We used a single Google Pixel 6a device (codename \textit{bluejay}) to evaluate the studied Android distributions. All tested builds are based on Android 16 and were obtained in December 2025: 
+Stock Android (BP4A.251205.006); 
+LineageOS (lineage-23.0-20251206, BP2A.250805.005); 
+LineageOS for microG (lineage-23.0-20251203-microG, BP2A.250805.005); 
+GrapheneOS (2025121200, BP4A.251205.006); 
+iod\'eOS (7.0-20251129-bluejay, BP2A.250805.005).
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{images/devices.eps}
+	\caption{Measurement setup. The Android device connects to a Wi-Fi access point hosted on a Linux computer that runs traffic interception and capture software. A custom system certificate is installed on the phone using root access. A USB connection is used for ADB/Frida communication.} \label{fig-devices}
+\end{figure}
+
+Network traffic analysis on Android is challenging due to enforced encryption, certificate pinning, and anti-tamper mechanisms. Traffic was captured using a controlled man-in-the-middle (MITM) gateway with a Linux host acting as a Wi-Fi router, redirecting HTTP(S) traffic through an intercepting proxy. QUIC over UDP/443 was blocked to force TCP-based TLS. The proxy CA was installed as a system-trusted certificate. We performed runtime certificate unpinning via Frida using scripts from HTTP Toolkit\footnote{\url{https://github.com/httptoolkit/frida-interception-and-unpinning}}. Full packet captures were recorded and compared across distributions. Where needed, we used publicly available Protocol Buffer definitions from microG's source code\footnote{\url{https://github.com/microg/GmsCore/}} to decode payloads. We acknowledge that we were not able to capture and analyze all traffic. Instead, we focus on identifying systematic differences between Android distributions and general behavioral patterns. A preview of the measurement setup is shown in Fig.~\ref{fig-devices}.
+
+\subsection{Measurement scenarios}
+To enable consistent and comparable measurements across Android distributions, four scenarios were defined. Scenarios were adapted to each system's capabilities (or skipped if not applicable). As a general principle, any required configuration step not available during initial setup was performed as soon as possible thereafter.
+
+\textit{Scenario A1: Default setup with Google account.}
+Typical user path. Google account sign-in is performed during setup and default recommendations are accepted (including prompted permissions).
+
+\textit{Scenario A2: Minimal setup with Google account.}
+This scenario extends \textit{Scenario A1} by adjusting settings towards privacy while retaining Google account functionality. During and after initial setup, all optional consents and permissions are declined, and settings are adjusted to maximize privacy. For privacy-focused systems, the distinction between Scenario A1 and Scenario A2 is minimal; therefore, we skipped it.
+
+\textit{Scenario B: Minimal setup without Google account.}
+Maximum privacy in mind, avoiding Google account sign-in entirely. Only strictly required prompts are accepted. Google components remain present and enabled, but operate without an account. This scenario applies to the same systems as Scenario A1.
+
+\textit{Scenario C: Extremely minimal setup without Google components.}
+Applies only to distributions that do not enable Google services by default. If microG is preinstalled, it remains disabled.
+
+\subsection{Measurement tasks}
+We performed the following tasks sequentially for each scenario. Network traffic was captured using Wireshark\footnote{\url{https://www.wireshark.org/}} for basic analysis.
+
+\textit{Task 0: Initial setup.}
+The device was configured according to the target scenario. Network traffic capture began with the device's first Internet connection and continued until 10 minutes after setup completion.
+
+\textit{Task 1: System idle.}
+The device was rebooted, then kept connected to the monitored network for at least 30 minutes. During this period, the device was unlocked three times and the application list was scrolled through. No applications were opened.
+
+\textit{Task 2: Basic application interactions.}
+Simple actions were performed: disable haptic feedback; toggle dark mode; check per-application battery usage; set an alarm; create a folder; create an on-device contact.
