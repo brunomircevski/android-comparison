@@ -2,7 +2,8 @@
 
 \subsection{Hardware and software}
 
-We used a single Google Pixel 6a device (codename \textit{bluejay}) to install and evaluate the studied Android distributions. This model was chosen due to its broad compatibility with alternative operating systems. All tested builds are based on Android 16 and were obtained in December 2025:
+We used a single Google Pixel 6a device (codename \textit{bluejay}) to install and evaluate the studied Android distributions. This model was chosen due to its broad compatibility with alternative operating systems. All tested builds are based on Android 16 and were obtained in December 2025. The BP4A and BP2A baseline differ due to LineageOS and iod\'eOS slower update cycle, confounding update-related traffic.
+
 \begin{itemize}
 	\item Stock Android: \texttt{BP4A.251205.006};
 	\item LineageOS: \texttt{lineage-23.0-20251206} (\texttt{BP2A.250805.005});
@@ -16,7 +17,7 @@ We used a single Google Pixel 6a device (codename \textit{bluejay}) to install a
 	\caption{Measurement setup. The Android device running the investigated operating systems is configured to access the Internet using Wi-Fi. The access point is hosted on a Linux computer, running traffic interception and capture software. A custom system certificate is installed on the phone using root access. A USB connection is used for ADB/Frida communication.} \label{fig-devices}
 \end{figure}
 
-Network traffic analysis on Android is challenging due to enforced encryption, certificate pinning, and anti-tamper mechanisms. Traffic was captured using a controlled man-in-the-middle (MITM) gateway with a Linux host acting as a Wi-Fi router, redirecting HTTP(S) traffic through an intercepting proxy. QUIC over UDP/443 was blocked to force TCP-based TLS. The proxy CA was installed as a system-trusted certificate (requiring root). Runtime unpinning via dynamic instrumentation was attempted where certificate pinning blocked interception. Full packet captures were recorded and compared across distributions. We acknowledge that we were not able to capture and analyze all traffic. Instead, we focus on identifying systematic differences between Android distributions and general behavioral patterns. A preview of the measurement setup is shown in Fig.~\ref{fig-devices}.
+Android traffic analysis is limited by encryption, certificate pinning, and anti-tamper mechanisms. We captured traffic through a controlled MITM Wi-Fi gateway and intercepting proxy. QUIC over UDP/443 was blocked to force TCP-based TLS, which may alter fallback behavior and is itself remotely observable. The proxy CA was installed as a system certificate using root, and runtime unpinning was attempted where needed. Full packet captures were compared across distributions, but coverage remained incomplete. Thus, a negative finding means ``not observed on decrypted channels,'' not ``not transmitted.'' Figure~\ref{fig-devices} shows the setup.
 
 \subsection{Threat model}
 
@@ -27,13 +28,13 @@ We define the primary adversary as Google due to its preinstalled, privileged sy
 We do not model active on-device attackers, physical device compromise, baseband-level attacks, or the exploitation of OS vulnerabilities. Therefore, this evaluation focuses on privacy leaks from standard, intended service integrations rather than device security.
 
 \subsection{Measurement scenarios}
-To enable consistent and comparable measurements across Android distributions, four scenarios were defined. Each scenario specifies the Google account state, consent and permission posture, and which Google components are present. Not all scenarios apply to every operating system due to their characteristics. Scenarios were adapted to each system's capabilities: on GrapheneOS, sandboxed Google Play Services were installed immediately after setup; on systems with microG, the component was enabled during initial setup when prompted, or activated manually immediately afterward. As a general principle, any required configuration step not available during initial setup was performed as soon as possible thereafter.
+Four scenarios specify Google account state, consent and permissions, and installed Google components; not all apply to every system. On GrapheneOS, sandboxed Google Play Services were installed immediately after setup. On microG systems, microG was enabled during setup when prompted or immediately afterward. Other unavailable setup steps were likewise performed as soon as possible.
 
 \paragraph{Scenario A1: Default setup with Google account.}
 The device is configured to reflect a typical user path. Google account sign-in is performed during setup (or immediately after) and default recommendations are accepted (including prompted permissions). This scenario is applicable to all systems, except LineageOS without any form of Google services.
 
 \paragraph{Scenario A2: Minimal setup with Google account.}
-This scenario extends \textit{Scenario A1} by adjusting settings towards privacy while retaining Google account functionality. During and after initial setup, all optional consents and permissions are declined. System and account settings are adjusted to maximize user privacy. For privacy-focused systems (e.g., those using microG or GrapheneOS), the distinction between Scenario A1 and Scenario A2 is minimal. These platforms are already designed to limit data collection and do not expose the same range of privacy-invasive options present in the factory configuration. Therefore, we evaluated only Scenario A1 for such systems.
+This scenario retains a Google account but declines optional consents and permissions and maximizes system and account privacy settings. Because privacy-focused systems expose fewer such options, Scenario A2 was measured only on stock Android and LineageOS with Gapps; other systems used Scenario A1 only.
 
 \paragraph{Scenario B: Minimal setup without Google account.}
 The device is configured with maximum privacy in mind, avoiding Google account sign-in entirely. During initial setup, only strictly required prompts are accepted and optional data-sharing is declined. System settings are adjusted to maximize user privacy. Google components or their functional replacements remain present and enabled to preserve baseline device functionality and application compatibility, but operate without an account. This scenario is applicable to the same systems as Scenario A1.
@@ -42,7 +43,7 @@ The device is configured with maximum privacy in mind, avoiding Google account s
 This scenario applies only to distributions that do not bundle or enable Google services by default. It is not applicable to the official factory system, which enables Google components by default. If microG is preinstalled, it remains disabled. We did not attempt to disable Google services on stock Android, as doing so significantly degrades or breaks core system and application functionality.
 
 \subsection{Measurement tasks}
-We performed the following measurement tasks sequentially for each scenario. Network traffic was captured using Wireshark\footnote{\url{https://www.wireshark.org/}} for basic analysis.
+The following tasks were performed sequentially for each scenario and captured with Wireshark.\footnote{\url{https://www.wireshark.org/}} Each system--scenario--task cell was measured once; without variance estimates, small differences and anomalies are not statistically reliable.
 
 \paragraph{Task 0: Initial setup.}
 The device was configured according to the target scenario. Network traffic capture began with the device's first Internet connection and continued until 10 minutes after setup completion.
