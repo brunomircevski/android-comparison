@@ -5,14 +5,14 @@
 Total network data usage across all operating systems and applicable scenarios is presented in Figures~\ref{fig-setup-chart}--\ref{fig-apps-chart}. Traffic volume is contextual rather than a direct privacy metric, because small requests may carry identifiers while large transfers may not. To keep the results comparable and avoid dominance by bulk transfers, we excluded traffic to domains used for application and system update payload delivery (large binary downloads). However, this exclusion was not perfect, and some residual update-related traffic remains in the dataset. Generally, we expect lower network traffic in configurations with fewer Google services present.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{images/setup-data-usage.eps}
+	\includegraphics[width=\textwidth]{images/setup-data-usage.pdf}
 	\caption{\textit{Task 0: Initial setup} data usage (MB). Scenario applicability varies by system (e.g., Scenario A1 requires Google services, which are absent on LineageOS).} \label{fig-setup-chart}
 \end{figure}
 
 Figure \ref{fig-setup-chart} illustrates network activity during initial device setup. As expected, stock Android shows the highest data usage (71-85 MB). The modest reductions between privacy-adjusted scenarios indicate that configuration choices provide little control over automatic updates and background activity. Configurations incorporating more Google services generate higher traffic, while de-Googled baselines demonstrate substantially reduced data exchange. LineageOS with official Google Play Services generates substantially less traffic (16-21 MB) than stock Android due to its minimal base system. However, it remains considerably higher than configurations without proprietary Google services, with the microG variant and the Google-free installation achieving notable further reductions (0-3 MB). For GrapheneOS, Scenario B demonstrates that even when sandboxed Google Play Services are installed and granted network and background permissions, they remain largely inactive when not deliberately invoked. This contrasts with the persistent background activity characteristic of integrated GMS deployments.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{images/idle-data-usage.eps}
+	\includegraphics[width=\textwidth]{images/idle-data-usage.pdf}
 	\caption{\textit{Task 1: System idle} data usage (MB). Scenario applicability varies by system; Scenario A2 was measured only on stock Android and LineageOS with Gapps.} \label{fig-idle-chart}
 \end{figure}
 
@@ -21,7 +21,7 @@ Network activity observed during system idle following a reboot is presented in 
 LineageOS in Scenario C similarly deviates from anticipated patterns, generating more idle traffic than its microG variant. GrapheneOS exhibits nearly identical traffic in Scenarios B and C, indicating minimal background activity from sandboxed Google Play Services in these captures when not actively in use.
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{images/apps-data-usage.eps}
+	\includegraphics[width=\textwidth]{images/apps-data-usage.pdf}
 	\caption{\textit{Task 2: Basic application interactions} data usage (MB). Scenario applicability varies by system (e.g., Scenario C is not applicable to stock Android, which bundles Google services by default).} \label{fig-apps-chart}
 \end{figure}
 
@@ -30,7 +30,7 @@ Figure~\ref{fig-apps-chart} shows network activity during basic application inte
 \subsection{Domain distribution and Google dependencies}
 
 \begin{figure}
-	\includegraphics[width=\textwidth]{images/domains.eps}
+	\includegraphics[width=\textwidth]{images/domains.pdf}
 	\caption{Domain-level distribution of network packets (pkts) for scenarios A1 (with Google account) and B (without Google account, but with Google services present), aggregated over all tasks. Each pie shows the top domains by packet count for a given operating system and scenario.} \label{fig-domains-chart}
 \end{figure}
 
